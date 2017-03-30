@@ -1,0 +1,14 @@
+model{
+  for( i in 1:N ) {
+    Y1[i] ~ dlnorm(mu[i], tau[i])
+    Y2[i] ~ dlnorm(mu[i], tau[i])
+    
+    sigma[i] <- beta1/exp(beta2*mu[i]) # Standard deviation
+    tau[i] <- 1/pow(sigma[i],2)
+  }
+  
+  #Prior
+  beta1 ~ dgamma(0.2,0.001)
+  beta2 ~ dgamma(0.2,0.001)
+  
+}
